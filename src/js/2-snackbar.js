@@ -2,8 +2,9 @@
 
 const form = document.querySelector(".form");
 
-form.addEventListener("submit", (event) => {
+form.addEventListener('submit', (event) => {
     event.preventDefault();
+
     
     // Отримання значення поля затримки при кожному відправленні форми
     const delayInput = parseInt(document.querySelector("input[name='delay']").value);
@@ -31,9 +32,9 @@ form.addEventListener("submit", (event) => {
         }).catch((delay) => {
             console.log(`❌ Rejected promise in ${delay} ms`)
         });
-
     
-    /*    
+    
+    /*
     promise
             .then((delay) => {
                 iziToast.success({
@@ -49,7 +50,7 @@ form.addEventListener("submit", (event) => {
                     position: "topRight",
                 });
             });
-    */
+*/
 
 });
 

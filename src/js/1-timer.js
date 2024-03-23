@@ -4,3 +4,7 @@
 // Такий таймер може використовуватися у блогах, інтернет - магазинах,
 // сторінках реєстрації подій, під час технічного обслуговування тощо.
 
+
+const dateTimePicker = document.getElementById("datetime-picker");
+const startButton = document.querySelector("[data-start]");
+
