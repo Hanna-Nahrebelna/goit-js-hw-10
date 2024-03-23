@@ -1,59 +1,42 @@
 // Завдання 2 - Генератор промісів
 
-const form = document.querySelector(".form");
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
+const formOfDelay = document.querySelector(".form");
 
-    
-    // Отримання значення поля затримки при кожному відправленні форми
-    const delayInput = parseInt(document.querySelector("input[name='delay']").value);
-    // Отримання значення поля стану при кожному відправленні форми
-    const stateInput = document.querySelector("input[name='state']:checked");
-    
-    const delay = parseInt(delayInput);
+formOfDelay.addEventListener('submit', event => {
+  event.preventDefault();
+  
+  const timer = parseInt(event.currentTarget.elements.delay.value);
+  const radio = event.currentTarget.elements.state.value;
+  
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (radio === "fulfilled") {
+        resolve(timer);
+      } else {
+        reject(timer);
+      }
+    }, timer);
+  });
 
-    const promise = new Promise((resolve, reject) => {
-        if (stateInput && stateInput.value === "fulfilled") {
-            setTimeout(() => {
-                resolve(delay);
-            }, delay);
-        } else {
-            setTimeout(() => {
-                reject(delay);
-            }, delay); // Вказуємо setTimeout для відтермінування
-        }
+  promise
+    .then(delayValue => {
+      iziToast.success({
+        color: 'green',
+        position: "topRight",
+        message: `Fulfilled promise in ${delayValue}ms`
+      });
+    })
+    .catch(delayValue => {
+      iziToast.error({
+        color: 'red',
+        position: "topRight",
+        message: `Rejected promise in ${delayValue}ms`
+      });
     });
-
-    
-    promise
-        .then((delay) => {
-            console.log(`✅ Fulfilled promise in ${delay} ms`);
-        }).catch((delay) => {
-            console.log(`❌ Rejected promise in ${delay} ms`)
-        });
-    
-    
-    /*
-    promise
-            .then((delay) => {
-                iziToast.success({
-                    title: "✅ Fulfilled promise",
-                    message: `in ${delay} ms`,
-                    position: "topRight",
-                });
-            })
-            .catch((delay) => {
-                iziToast.error({
-                    title: "❌ Rejected promise",
-                    message: `in ${delay} ms`,
-                    position: "topRight",
-                });
-            });
-*/
-
 });
-
 
 
 
