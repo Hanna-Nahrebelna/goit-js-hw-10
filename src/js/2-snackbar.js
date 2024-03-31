@@ -1,5 +1,3 @@
-// Завдання 2 - Генератор промісів
-
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
@@ -37,6 +35,3 @@ formOfDelay.addEventListener('submit', event => {
       });
     });
 });
-
-
-
